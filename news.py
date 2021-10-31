@@ -49,6 +49,7 @@ def feed_url(query) -> str:
 
     return url
 
+
 def feed_xml_tree(url: str) -> ElementTree:
     with urlopen(url) as file:
         xml = file.read().decode("utf-8")
@@ -56,6 +57,7 @@ def feed_xml_tree(url: str) -> ElementTree:
     xml_tree = ElementTree.fromstring(xml)
 
     return xml_tree
+
 
 def feed_climate_change_titles(after: date = None, before: date = None) -> list[str]:
     query = feed_query("climate change", after, before)
@@ -70,5 +72,6 @@ def feed_climate_change_titles(after: date = None, before: date = None) -> list[
         titles.append(item.find("title").text)
 
     return titles
+
 
 print(feed_climate_change_titles(date(2020, 10, 1), date(2020, 10, 31)))
