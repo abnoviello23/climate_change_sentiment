@@ -92,10 +92,3 @@ def feed_climate_change_titles(after: date = None, before: date = None) -> list[
 
     return titles
 
-
-pprint(
-    feed_climate_change_titles(
-        date(2010, 10, 1),
-        date(2010, 10, 31),
-    )
-)
