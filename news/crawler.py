@@ -57,6 +57,8 @@ def get_feed_url(query) -> str:
     for key, value in parameters.items():
         url += key + "=" + value + "&"
 
+    url.rstrip("&")
+
     return url
 
 
@@ -73,7 +75,10 @@ def get_feed_xml_tree(url: str) -> ElementTree:
     return xml_tree
 
 
-def get_feed_climate_change_titles(after: date = None, before: date = None) -> list[str]:
+def get_feed_climate_change_titles(
+    after: date = None,
+    before: date = None,
+) -> list[str]:
     """
     Find the titles of (the top 100) Google News climate change articles between two dates.
     """
