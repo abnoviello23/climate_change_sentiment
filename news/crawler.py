@@ -9,7 +9,7 @@ from xml.etree import ElementTree
 
 
 # The feed URL.
-FEED_URL = "https://news.google.com/rss"
+FEED_URL = "https://news.google.com/rss/search"
 
 # The ISO language and country code.
 LANGUAGE = "en"
