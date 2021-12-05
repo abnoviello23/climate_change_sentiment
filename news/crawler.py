@@ -2,7 +2,6 @@
 Find news from Google News using the RSS feed.
 """
 
-from pprint import pprint
 from datetime import date
 from urllib.parse import quote
 from urllib.request import urlopen
@@ -24,7 +23,7 @@ FEED_PARAMETERS = {
 }
 
 
-def feed_query(query: str, after: date = None, before: date = None) -> str:
+def get_feed_query(query: str, after: date = None, before: date = None) -> str:
     """
     Construct a Google News feed query from a query string and before and after dates.
 
@@ -40,7 +39,7 @@ def feed_query(query: str, after: date = None, before: date = None) -> str:
     return quote(query)
 
 
-def feed_url(query) -> str:
+def get_feed_url(query) -> str:
     """
     Construct a Google News feed URL from a query.
     """
@@ -61,7 +60,7 @@ def feed_url(query) -> str:
     return url
 
 
-def feed_xml_tree(url: str) -> ElementTree:
+def get_feed_xml_tree(url: str) -> ElementTree:
     """
     Open a feed URL and parse the XML into a Python XML element tree.
     """
@@ -74,14 +73,14 @@ def feed_xml_tree(url: str) -> ElementTree:
     return xml_tree
 
 
-def feed_climate_change_titles(after: date = None, before: date = None) -> list[str]:
+def get_feed_climate_change_titles(after: date = None, before: date = None) -> list[str]:
     """
     Find the titles of (the top 100) Google News climate change articles between two dates.
     """
 
-    query = feed_query("climate change", after, before)
-    url = feed_url(query)
-    tree = feed_xml_tree(url)
+    query = get_feed_query("climate change", after, before)
+    url = get_feed_url(query)
+    tree = get_feed_xml_tree(url)
     channel = tree.find("channel")
     items = channel.iter("item")
 
@@ -91,4 +90,3 @@ def feed_climate_change_titles(after: date = None, before: date = None) -> list[
         titles.append(item.find("title").text)
 
     return titles
-
