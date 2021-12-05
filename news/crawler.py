@@ -57,7 +57,7 @@ def get_feed_url(query) -> str:
     for key, value in parameters.items():
         url += key + "=" + value + "&"
 
-    url.rstrip("&")
+    url = url.rstrip("&")
 
     return url
 
