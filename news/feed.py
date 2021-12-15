@@ -75,15 +75,18 @@ def get_feed_xml_tree(url: str) -> ElementTree:
     return xml_tree
 
 
-def get_feed_climate_change_titles(
+def get_feed_titles(
     after: date = None,
     before: date = None,
+    query: str = "climate change",
 ) -> list[str]:
     """
-    Find the titles of (the top 100) Google News climate change articles between two dates.
+    Find the titles of the Google News articles between two dates.
     """
 
-    query = get_feed_query("climate change", after, before)
+    # TODO: Use the climate change topic built into Google News.
+
+    query = get_feed_query(query, after, before)
     url = get_feed_url(query)
     tree = get_feed_xml_tree(url)
     channel = tree.find("channel")
