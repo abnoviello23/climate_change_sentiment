@@ -6,7 +6,7 @@ import csv
 import datetime
 
 from news import VOLUME_FILENAME
-from news.crawler import get_feed_climate_change_titles
+from news.feed import get_feed_climate_change_titles
 
 
 # Find a list of dates between the start of 2010 and today.
