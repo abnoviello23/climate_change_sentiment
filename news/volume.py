@@ -5,7 +5,9 @@ Determine the volume of climate change articles for specific days.
 import csv
 import datetime
 
-from news import VOLUME_FILE_NAME
+import matplotlib
+
+from news import VOLUME_FILENAME
 from news.feed import feed_titles
 from news.helpers import date_range
 
@@ -21,7 +23,7 @@ def load_volume() -> None:
     Determine the volume of articles for each day.
     """
 
-    with open(VOLUME_FILE_NAME, "w", newline="", encoding="utf-8") as file:
+    with open(VOLUME_FILENAME, "w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
 
         writer.writerow(["Date", "Volume"])
@@ -29,7 +31,7 @@ def load_volume() -> None:
     for date in dates:
         volume = len(feed_titles(date, date + datetime.timedelta(days=1)))
 
-        with open(VOLUME_FILE_NAME, "a", newline="", encoding="utf-8") as file:
+        with open(VOLUME_FILENAME, "a", newline="", encoding="utf-8") as file:
             writer = csv.writer(file)
 
             writer.writerow([str(date), volume])
