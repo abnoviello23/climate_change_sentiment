@@ -5,16 +5,21 @@ Helper functions for processing the news article data.
 import datetime
 
 
-def date_range(start: datetime.date, end: datetime.date) -> list:
+def date_range(start: datetime.date, stop: datetime.date) -> list:
     """
-    Return the list of dates between a start and end date.
+    Return the list of dates between the `start` and `stop` dates.
+    """
 
-    Unlike the `range` function, this range is inclusive.
-    """
+    if not start <= stop:
+        raise RuntimeError("The start date must be before the end date.")
 
     date_range = [start]
 
-    while date_range[-1] < end:
-        date_range.append(date_range[-1] + datetime.timedelta(days=1))
+    next_date = start + datetime.timedelta(days=1)
+
+    while next_date < stop:
+        date_range.append(next_date)
+
+        next_date += datetime.timedelta(days=1)
 
     return date_range
