@@ -4,7 +4,7 @@ Find news from Google News using the RSS feed.
 
 import datetime
 import urllib
-import xml
+import xml.etree.ElementTree
 
 # The feed URL.
 FEED_URL = "https://news.google.com/rss/search"
