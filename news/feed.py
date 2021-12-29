@@ -2,28 +2,19 @@
 Find news from Google News using the RSS feed.
 """
 
-from datetime import date
-from urllib.parse import quote
-from urllib.request import urlopen
-from xml.etree import ElementTree
-
+import datetime
+import urllib
+import xml
 
 # The feed URL.
 FEED_URL = "https://news.google.com/rss/search"
 
-# The ISO language and country code.
-LANGUAGE = "en"
-COUNTRY = "US"
 
-# The default parameters for the Google News feed.
-FEED_PARAMETERS = {
-    "hl": LANGUAGE + "-" + COUNTRY,
-    "gl": COUNTRY,
-    "ceid": COUNTRY + ":" + LANGUAGE,
-}
-
-
-def get_feed_query(query: str, after: date = None, before: date = None) -> str:
+def feed_query(
+    query: str,
+    after: datetime.date = None,
+    before: datetime.date = None,
+) -> str:
     """
     Construct a Google News feed query from a query string and before and after dates.
 
@@ -36,10 +27,10 @@ def get_feed_query(query: str, after: date = None, before: date = None) -> str:
     if before is not None:
         query += " before:" + str(before)
 
-    return quote(query)
+    return urllib.parse.quote(query)
 
 
-def get_feed_url(query) -> str:
+def feed_url(query) -> str:
     """
     Construct a Google News feed URL from a query.
     """
@@ -48,7 +39,6 @@ def get_feed_url(query) -> str:
 
     parameters = {
         "q": query,
-        **FEED_PARAMETERS,
     }
 
     # Add all of the parameters to the URL.
@@ -62,22 +52,22 @@ def get_feed_url(query) -> str:
     return url
 
 
-def get_feed_xml_tree(url: str) -> ElementTree:
+def feed_xml_tree(url: str) -> xml.etree.ElementTree:
     """
     Open a feed URL and parse the XML into a Python XML element tree.
     """
 
-    with urlopen(url) as file:
-        xml = file.read().decode("utf-8")
+    with urllib.request.urlopen(url) as file:
+        feed_xml = file.read().decode("utf-8")
 
-    xml_tree = ElementTree.fromstring(xml)
+    xml_tree = xml.etree.ElementTree.fromstring(feed_xml)
 
     return xml_tree
 
 
-def get_feed_titles(
-    after: date = None,
-    before: date = None,
+def feed_titles(
+    after: datetime.date = None,
+    before: datetime.date = None,
     query: str = "climate change",
 ) -> list[str]:
     """
@@ -86,9 +76,9 @@ def get_feed_titles(
 
     # TODO: Use the climate change topic built into Google News.
 
-    query = get_feed_query(query, after, before)
-    url = get_feed_url(query)
-    tree = get_feed_xml_tree(url)
+    query = feed_query(query, after, before)
+    url = feed_url(query)
+    tree = feed_xml_tree(url)
     channel = tree.find("channel")
     items = channel.iter("item")
 

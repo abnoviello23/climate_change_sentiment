@@ -5,7 +5,7 @@ Helper functions for processing the news article data.
 import datetime
 
 
-def get_date_range(start: datetime.date, end: datetime.date) -> list:
+def date_range(start: datetime.date, end: datetime.date) -> list:
     """
     Return the list of dates between a start and end date.
 
