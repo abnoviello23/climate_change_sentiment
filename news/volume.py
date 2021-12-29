@@ -16,7 +16,7 @@ end_date = datetime.date.today()
 dates = date_range(start_date, end_date)
 
 
-def download_volume():
+def load_volume() -> None:
     """
     Determine the volume of articles for each day.
     """
