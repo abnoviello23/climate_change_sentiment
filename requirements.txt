@@ -1,0 +1,6 @@
+matplotlib
+
+# Project
+pylint
+black
+isort
