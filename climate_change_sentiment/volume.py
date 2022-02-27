@@ -27,12 +27,16 @@ def load_volume(
     """
 
     if volume_path:
+        volume_path.mkdir(parents=True, exist_ok=True)
+
         with volume_path.open("w") as file:
             writer = csv.writer(file)
 
             writer.writerow(["Date", "Volume"])
 
     if titles_path:
+        titles_path.mkdir(parents=True, exist_ok=True)
+
         with titles_path.open("w") as file:
             writer = csv.writer(file)
 
