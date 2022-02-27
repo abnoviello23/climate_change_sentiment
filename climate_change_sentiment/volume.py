@@ -6,8 +6,6 @@ import csv
 import pathlib
 import datetime
 
-import matplotlib
-
 import climate_change_sentiment
 import climate_change_sentiment.helpers
 import climate_change_sentiment.feed
