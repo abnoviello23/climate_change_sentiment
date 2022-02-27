@@ -27,7 +27,7 @@ def load_volume(
     """
 
     if volume_path:
-        volume_path.mkdir(parents=True, exist_ok=True)
+        volume_path.parent.mkdir(parents=True, exist_ok=True)
 
         with volume_path.open("w", encoding="utf-8") as file:
             writer = csv.writer(file)
@@ -35,7 +35,7 @@ def load_volume(
             writer.writerow(["Date", "Volume"])
 
     if titles_path:
-        titles_path.mkdir(parents=True, exist_ok=True)
+        titles_path.parent.mkdir(parents=True, exist_ok=True)
 
         with titles_path.open("w", encoding="utf-8") as file:
             writer = csv.writer(file)
