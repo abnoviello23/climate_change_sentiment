@@ -3,7 +3,8 @@ Find news from Google News using the RSS feed.
 """
 
 import datetime
-import urllib
+import urllib.parse
+import urllib.request
 import xml.etree.ElementTree
 
 # The feed URL.
