@@ -66,9 +66,9 @@ def get_feed_xml_tree(url: str) -> xml.etree.ElementTree:
 
 
 def get_feed_titles(
+    query: str,
     after: datetime.date = None,
     before: datetime.date = None,
-    query: str = "climate change",
 ) -> list[str]:
     """
     Find the titles of the Google News articles between two dates.
