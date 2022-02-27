@@ -29,7 +29,7 @@ def load_volume(
     if volume_path:
         volume_path.parent.mkdir(parents=True, exist_ok=True)
 
-        with volume_path.open("w", encoding="utf-8") as file:
+        with volume_path.open("w", newline="", encoding="utf-8") as file:
             writer = csv.writer(file)
 
             writer.writerow(["Date", "Volume"])
@@ -37,7 +37,7 @@ def load_volume(
     if titles_path:
         titles_path.parent.mkdir(parents=True, exist_ok=True)
 
-        with titles_path.open("w", encoding="utf-8") as file:
+        with titles_path.open("w", newline="", encoding="utf-8") as file:
             writer = csv.writer(file)
 
             writer.writerow(["Date", "Title"])
@@ -50,13 +50,13 @@ def load_volume(
         volume = len(titles)
 
         if volume_path:
-            with volume_path.open("w", encoding="utf-8") as file:
+            with volume_path.open("a", newline="", encoding="utf-8") as file:
                 writer = csv.writer(file)
 
                 writer.writerow([str(date), volume])
 
         if titles_path:
-            with titles_path.open("w", encoding="utf-8") as file:
+            with titles_path.open("a", newline="", encoding="utf-8") as file:
                 writer = csv.writer(file)
 
                 for title in titles:
