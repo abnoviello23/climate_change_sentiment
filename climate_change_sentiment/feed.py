@@ -10,7 +10,7 @@ import xml.etree.ElementTree
 FEED_URL = "https://news.google.com/rss/search"
 
 
-def feed_query(
+def get_feed_query(
     query: str,
     after: datetime.date = None,
     before: datetime.date = None,
@@ -30,7 +30,7 @@ def feed_query(
     return urllib.parse.quote(query)
 
 
-def feed_url(query) -> str:
+def get_feed_url(query) -> str:
     """
     Construct a Google News feed URL from a query.
     """
@@ -52,7 +52,7 @@ def feed_url(query) -> str:
     return url
 
 
-def feed_xml_tree(url: str) -> xml.etree.ElementTree:
+def get_feed_xml_tree(url: str) -> xml.etree.ElementTree:
     """
     Open a feed URL and parse the XML into a Python XML element tree.
     """
@@ -65,7 +65,7 @@ def feed_xml_tree(url: str) -> xml.etree.ElementTree:
     return xml_tree
 
 
-def feed_titles(
+def get_feed_titles(
     after: datetime.date = None,
     before: datetime.date = None,
     query: str = "climate change",
@@ -74,11 +74,9 @@ def feed_titles(
     Find the titles of the Google News articles between two dates.
     """
 
-    # TODO: Use the climate change topic built into Google News.
-
-    query = feed_query(query, after, before)
-    url = feed_url(query)
-    tree = feed_xml_tree(url)
+    query = get_feed_query(query, after, before)
+    url = get_feed_url(query)
+    tree = get_feed_xml_tree(url)
     channel = tree.find("channel")
     items = channel.iter("item")
 
