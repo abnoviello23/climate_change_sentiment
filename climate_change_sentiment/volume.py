@@ -10,8 +10,8 @@ import climate_change_sentiment
 import climate_change_sentiment.helpers
 import climate_change_sentiment.feed
 
-# Find a list of dates between the start of 2020 and today.
-start_date = datetime.date(2020, 1, 1)
+# Find a list of dates between the start of 2010 and today.
+start_date = datetime.date(2010, 1, 1)
 end_date = datetime.date.today()
 
 dates = climate_change_sentiment.helpers.get_date_range(start_date, end_date)
